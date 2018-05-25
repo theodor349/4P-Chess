@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,7 +41,7 @@ public class TileController : MonoBehaviour {
             return;
         }
 
-        GameObject go = Instantiate(tilePrefab, new Vector3(t.x, t.y), Quaternion.identity, transform);
+        GameObject go = Instantiate(tilePrefab, t.GetPosition(), Quaternion.identity, transform);
         go.name = "Tile_" + t.x + "_" + t.y;
         if (t.isWhite)
         {

@@ -15,7 +15,6 @@ public class World {
     // Creates a new world
     public World(int width, int height, int cornerX, int cornerY)
     {
-        Debug.Log("New World");
         instance = this;
 
         this.width = width;
@@ -25,6 +24,16 @@ public class World {
         characters = new List<Character>();
 
         CreateBoard(width, height, cornerX, cornerY);
+        CreateCharacters();
+    }
+
+    // Creates all characters
+    private void CreateCharacters()
+    {
+        characters.Add(new Character(GetTileAt(5, 6), Piece.BISHOP, Color.blue));
+        characters.Add(new Character(GetTileAt(6, 6), Piece.BISHOP, Color.red));
+        characters.Add(new Character(GetTileAt(5, 5), Piece.BISHOP, Color.green));
+        characters.Add(new Character(GetTileAt(6, 5), Piece.BISHOP, Color.yellow));
     }
 
     // Creates the board

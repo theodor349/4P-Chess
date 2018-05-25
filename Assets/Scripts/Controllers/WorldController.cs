@@ -6,8 +6,15 @@ public class WorldController : MonoBehaviour {
 
     private void Start()
     {
-        Debug.Log("Start");
         new World(15, 15, 3, 3);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            World.instance.characters[0].Kill();
+        }
     }
 
 }

@@ -28,6 +28,11 @@ public class Tile {
         this.world = world;
     }
 
+    public Vector3 GetPosition()
+    {
+        return new Vector3(x, y, 0);
+    }
+
 
 
 }

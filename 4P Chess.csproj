@@ -302,10 +302,11 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controllers\CharacterController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\MouseController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\InputController.cs" />
     <Compile Include="Assets\Scripts\Controllers\TileController.cs" />
     <Compile Include="Assets\Scripts\Controllers\WorldController.cs" />
     <Compile Include="Assets\Scripts\Models\Character.cs" />
+    <Compile Include="Assets\Scripts\Models\StateHandler.cs" />
     <Compile Include="Assets\Scripts\Models\Tile.cs" />
     <Compile Include="Assets\Scripts\Models\World.cs" />
   </ItemGroup>

@@ -11,6 +11,8 @@ public class CharacterController : MonoBehaviour {
     // Dictionary that stores a relation between a gameobject and a character
     Dictionary<Character, GameObject> characterGameobjectMap;
 
+    public GameObject gameobjectPrefab;
+
     private void Start()
     {
         world = World.instance;
@@ -31,9 +33,10 @@ public class CharacterController : MonoBehaviour {
     // Draws a character
     private void DrawCharacter(Character c)
     {
-        GameObject go = Instantiate(new GameObject());
+        GameObject go = Instantiate(gameobjectPrefab);
         go.transform.position = c.tile.GetPosition();
         go.transform.SetParent(transform);
+        go.name = GetName(c);
 
         SpriteRenderer rendere = go.AddComponent<SpriteRenderer>();
         rendere.sprite = GetSprite(c);
@@ -42,6 +45,41 @@ public class CharacterController : MonoBehaviour {
 
         c.RegistreCharacterUpdatedCallback(UpdateCharacter);
         characterGameobjectMap.Add(c, go);
+    }
+
+    // Returns the name for a character
+    private string GetName(Character c)
+    {
+        string name = "";
+
+        if(c.color == Color.red)
+        {
+            name += "RED";
+        }
+        else if(c.color == Color.green)
+        {
+            name += "GREEN";
+        }
+        else if(c.color == Color.blue)
+        {
+            name += "BLUE";
+        }
+        else if(c.color == Color.yellow)
+        {
+            name += "YELLOW";
+        }
+        else
+        {
+            name += "UNKNOWCOLOR";
+        }
+    
+        name += "_";
+
+        string type = c.type.ToString();
+        name += type.Substring(0, 1);
+        name += type.Substring(1).ToLower();
+
+        return name;
     }
 
     // Returns the matching sprite

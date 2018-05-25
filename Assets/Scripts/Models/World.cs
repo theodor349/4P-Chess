@@ -5,6 +5,7 @@ using UnityEngine;
 public class World {
 
     public static World instance;
+    public StateHandler stateHandler;
 
     public Tile[,] tiles;
     public List<Character> characters;
@@ -16,6 +17,7 @@ public class World {
     public World(int width, int height, int cornerX, int cornerY)
     {
         instance = this;
+        stateHandler = new StateHandler(this);
 
         this.width = width;
         this.height = height;

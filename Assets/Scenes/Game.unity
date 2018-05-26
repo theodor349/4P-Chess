@@ -355,6 +355,8 @@ MonoBehaviour:
   tilePrefab: {fileID: 1161761659640578, guid: 2f4762e95eb2d6b4097eed1c0a559f82, type: 2}
   whiteColor: {r: 1, g: 0.7857258, b: 0.4198113, a: 1}
   blackColor: {r: 0.4811321, g: 0.25690022, b: 0, a: 1}
+  highlightedColor: {r: 0, g: 1, b: 0.02520442, a: 1}
+  highlightedEnemyColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1948644918
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,3 +397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a64c74a1e9ece842aef450002601105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerColors:
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}

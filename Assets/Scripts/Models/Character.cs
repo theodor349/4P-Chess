@@ -18,12 +18,14 @@ public class Character {
         this.tile = tile;
         this.type = type;
         this.color = color;
+
+        tile.character = this;
     }
 
     // Kills the character
-    public void Kill()
+    public void Die()
     {
-        Update(); 
+        Update(true); 
     }
 
     // Moves the character
@@ -31,17 +33,24 @@ public class Character {
     {
         tile.character = null;
         tile = t;
+
+        // If there is a character at the destination, kill it
+        if(t.character != null)
+        {
+            t.character.Die();
+        }
+
         t.character = this;
 
         Update();
     }
 
     // Updates the character
-    private void Update()
+    private void Update(bool wasKilled = false)
     {
         if (characterUpdated != null)
         {
-            characterUpdated(this, true);
+            characterUpdated(this, wasKilled);
         }
     }
 

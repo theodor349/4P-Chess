@@ -13,8 +13,10 @@ public class World {
     public int width;
     public int height;
 
+    public Color[] playerColors;
+
     // Creates a new world
-    public World(int width, int height, int cornerX, int cornerY)
+    public World(int width, int height, int cornerX, int cornerY, Color[] playerColors)
     {
         instance = this;
         stateHandler = new StateHandler(this);
@@ -22,6 +24,7 @@ public class World {
         this.width = width;
         this.height = height;
 
+        this.playerColors = playerColors;
         tiles = new Tile[width, height];
         characters = new List<Character>();
 
@@ -32,10 +35,10 @@ public class World {
     // Creates all characters
     private void CreateCharacters()
     {
-        characters.Add(new Character(GetTileAt(5, 6), Piece.BISHOP, Color.blue));
-        characters.Add(new Character(GetTileAt(6, 6), Piece.BISHOP, Color.red));
-        characters.Add(new Character(GetTileAt(5, 5), Piece.BISHOP, Color.green));
-        characters.Add(new Character(GetTileAt(6, 5), Piece.BISHOP, Color.yellow));
+        characters.Add(new Character(GetTileAt(5, 6), Piece.KING, playerColors[0]));
+        characters.Add(new Character(GetTileAt(6, 6), Piece.BISHOP, playerColors[1]));
+        characters.Add(new Character(GetTileAt(5, 5), Piece.ROOK, playerColors[2]));
+        characters.Add(new Character(GetTileAt(6, 5), Piece.KNIGHT, playerColors[3]));
     }
 
     // Creates the board
@@ -120,6 +123,21 @@ public class World {
         }
 
         return tiles[x, y];
+    }
+    // Returns a tile at a given x y corrdinate
+    public Tile GetTileAt(Vector2 pos)
+    {
+        if (pos.x >= width || pos.x < 0 || pos.y > height || pos.y < 0)
+        {
+            return null;
+        }
+
+        if (!tiles[(int)pos.x, (int)pos.y].isPartOfBoard)
+        {
+            return null;
+        }
+
+        return tiles[(int)pos.x, (int)pos.y];
     }
 
 }

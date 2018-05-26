@@ -6,9 +6,13 @@ public class TileController : MonoBehaviour {
 
     World world;
 
+    // Prifab
     public GameObject tilePrefab;
+    // Colors
     public Color whiteColor;
     public Color blackColor;
+    public Color highlightedColor;
+    public Color highlightedEnemyColor;
 
     // Dictionary that stores a relation between a gameobject and a tile
     private Dictionary<Tile, GameObject> tileGameobjectMap;
@@ -43,16 +47,48 @@ public class TileController : MonoBehaviour {
 
         GameObject go = Instantiate(tilePrefab, t.GetPosition(), Quaternion.identity, transform);
         go.name = "Tile_" + t.x + "_" + t.y;
-        if (t.isWhite)
+
+
+        tileGameobjectMap.Add(t, go);
+        t.RegistreTileUpdatedCallback(TileUpdated);
+        SetColor(t);
+    }
+
+    // Sets the color of the tile
+    private void SetColor(Tile t)
+    {
+        SpriteRenderer rendere = tileGameobjectMap[t].GetComponent<SpriteRenderer>();
+
+        // Is it highlighted
+        if (!t.isHighlighted)
         {
-            go.GetComponent<SpriteRenderer>().color = whiteColor;
+            if (t.isWhite)
+            {
+                rendere.color = whiteColor;
+            }
+            else
+            {
+                rendere.color = blackColor;
+            }
         }
         else
         {
-            go.GetComponent<SpriteRenderer>().color = blackColor;
+            // Is there an enemy on that tile
+            if(t.character != null)
+            {
+                rendere.color = highlightedEnemyColor;
+            }
+            else
+            {
+                rendere.color = highlightedColor;
+            }
         }
+    }
 
-        tileGameobjectMap.Add(t, go);
+    // Runs when a tile is updated
+    public void TileUpdated(Tile t)
+    {
+        SetColor(t);
     }
 
 }

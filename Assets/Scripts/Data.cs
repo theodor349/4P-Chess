@@ -7,6 +7,6 @@ using UnityEngine;
 
 public class Data {
 
-    public static int playerCount = 4;
+    public static int playerCount = 3;
     public static Color[] colors = { Color.green, Color.blue, Color.red, Color.yellow };
 }

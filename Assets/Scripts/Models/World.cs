@@ -12,6 +12,7 @@ public class World {
 
     public int width;
     public int height;
+    public int playerCount;
 
     public Color[] playerColors;
 
@@ -23,8 +24,9 @@ public class World {
 
         this.width = width;
         this.height = height;
-
+        this.playerCount = playerCount;
         this.playerColors = playerColors;
+
         tiles = new Tile[width, height];
         characters = new List<Character>();
 
@@ -35,10 +37,53 @@ public class World {
     // Creates all characters
     private void CreateCharacters()
     {
-        characters.Add(new Character(GetTileAt(5, 6), Piece.KNIGHT, playerColors[0]));
-        characters.Add(new Character(GetTileAt(6, 6), Piece.QUEEN, playerColors[1]));
-        characters.Add(new Character(GetTileAt(5, 5), Piece.ROOK, playerColors[2]));
-        characters.Add(new Character(GetTileAt(6, 5), Piece.PAWN, playerColors[3]));
+        Player1();
+
+        if(playerCount >= 1)
+        {
+            Player2();
+        }
+        if(playerCount >= 2)
+        {
+            Player3();
+        }
+        if (playerCount >= 3)
+        {
+            Player4();
+        }
+    }
+
+    // Player 1
+    private void Player1()
+    {
+        for (int y = 3; y < 11; y++)
+        {
+            characters.Add(new Character(GetTileAt(1, y), Piece.PAWN, playerColors[0]));
+        }
+    }
+    // Player 2
+    private void Player2()
+    {
+        for (int y = 3; y < 11; y++)
+        {
+            characters.Add(new Character(GetTileAt(12, y), Piece.PAWN, playerColors[1]));
+        }
+    }
+    // Player 3
+    private void Player3()
+    {
+        for (int x = 3; x < 11; x++)
+        {
+            characters.Add(new Character(GetTileAt(x, 1), Piece.PAWN, playerColors[2]));
+        }
+    }
+    // Player 4
+    private void Player4()
+    {
+        for (int x = 3; x < 11; x++)
+        {
+            characters.Add(new Character(GetTileAt(x, 12), Piece.PAWN, playerColors[3]));
+        }
     }
 
     // Creates the board

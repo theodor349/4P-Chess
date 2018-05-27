@@ -305,11 +305,15 @@
     <Compile Include="Assets\Scripts\Controllers\InputController.cs" />
     <Compile Include="Assets\Scripts\Controllers\TileController.cs" />
     <Compile Include="Assets\Scripts\Controllers\WorldController.cs" />
+    <Compile Include="Assets\Scripts\Data.cs" />
     <Compile Include="Assets\Scripts\Models\Character.cs" />
     <Compile Include="Assets\Scripts\Models\CharacterRules.cs" />
     <Compile Include="Assets\Scripts\Models\StateHandler.cs" />
     <Compile Include="Assets\Scripts\Models\Tile.cs" />
     <Compile Include="Assets\Scripts\Models\World.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerColorOption.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerNumberOptions.cs" />
+    <Compile Include="Assets\Scripts\UI\StartButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Ideas.txt" />

@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class WorldController : MonoBehaviour {
 
-    public Color[] playerColors;
-
     private void Start()
     {
-        new World(15, 15, 3, 3, playerColors);
+        new World(15, 15, 3, 3, Data.colors, Data.playerCount);
     }
 
     private void Update()

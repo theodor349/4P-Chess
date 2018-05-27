@@ -16,7 +16,7 @@ public class World {
     public Color[] playerColors;
 
     // Creates a new world
-    public World(int width, int height, int cornerX, int cornerY, Color[] playerColors)
+    public World(int width, int height, int cornerX, int cornerY, Color[] playerColors, int playerCount)
     {
         instance = this;
         stateHandler = new StateHandler(this);

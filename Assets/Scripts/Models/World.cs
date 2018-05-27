@@ -35,10 +35,10 @@ public class World {
     // Creates all characters
     private void CreateCharacters()
     {
-        characters.Add(new Character(GetTileAt(5, 6), Piece.KING, playerColors[0]));
-        characters.Add(new Character(GetTileAt(6, 6), Piece.BISHOP, playerColors[1]));
+        characters.Add(new Character(GetTileAt(5, 6), Piece.KNIGHT, playerColors[0]));
+        characters.Add(new Character(GetTileAt(6, 6), Piece.QUEEN, playerColors[1]));
         characters.Add(new Character(GetTileAt(5, 5), Piece.ROOK, playerColors[2]));
-        characters.Add(new Character(GetTileAt(6, 5), Piece.KNIGHT, playerColors[3]));
+        characters.Add(new Character(GetTileAt(6, 5), Piece.PAWN, playerColors[3]));
     }
 
     // Creates the board
@@ -112,7 +112,7 @@ public class World {
     // Returns a tile at a given x y corrdinate
     public Tile GetTileAt(int x, int y)
     {
-        if(x >= width || x < 0 || y > height || y < 0)
+        if(x >= width || x < 0 || y >= height || y < 0)
         {
             return null;
         }

@@ -1,0 +1,2 @@
+- Networking
+- A players last move is colored in the color of the player that moved

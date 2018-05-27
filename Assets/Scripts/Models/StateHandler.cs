@@ -46,10 +46,7 @@ public class StateHandler {
     // Right click (Move character or deselect)
     public void InputRightClick(Vector2 pos)
     {
-        if (MoveCharacter(pos))
-        {
-            turnCount++;
-        }
+        DeselectCharacter();
     }
 
     // Selects a character at given pos
@@ -91,6 +88,13 @@ public class StateHandler {
             return false;
         }
 
+        // Check if it can move at all
+        if (moveableTiles == null || moveableTiles.Count == 0)
+        {
+            SelectCharacter(pos);
+            return false;
+        }
+
         // Check to see if the character can move to there
         if (!moveableTiles.Contains(t))
         {
@@ -107,8 +111,6 @@ public class StateHandler {
 
         // Move the character
         selectedCharacter.Move(t);
-        Debug.Log("Move character");
-
         DeselectCharacter();
         return true;
     }
@@ -133,13 +135,21 @@ public class StateHandler {
         selectedCharacter = null;
 
         RemoveHighlightedTile();
-        
-        moveableTiles.Clear();
+
+        if (moveableTiles != null)
+        {
+            moveableTiles.Clear();
+        }
     }
 
     // Highlights tiles
     private void HighlightTiles()
     {
+        if (moveableTiles == null || moveableTiles.Count == 0)
+        {
+            return;
+        }
+
         foreach (Tile t in moveableTiles)
         {
             t.Highlight();
@@ -149,6 +159,11 @@ public class StateHandler {
     // Removes the highlight on highlighted tiles
     private void RemoveHighlightedTile()
     {
+        if(moveableTiles == null || moveableTiles.Count == 0)
+        {
+            return;
+        }
+
         foreach (Tile t in moveableTiles)
         {
             t.RemoveHighlight();

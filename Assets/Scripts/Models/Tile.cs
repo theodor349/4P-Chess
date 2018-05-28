@@ -13,6 +13,7 @@ public class Tile {
     // The color is black if false
     public bool isWhite;
     public bool isHighlighted = false;
+    public Color tempColor = Color.clear;
 
     // Is false if not part of the board
     public bool isPartOfBoard;
@@ -60,6 +61,13 @@ public class Tile {
         {
             tileUpdated(this);
         }
+    }
+
+    // Sets a temporary color for the tile
+    public void SetTempColor(Color c)
+    {
+        tempColor = c;
+        Update();
     }
 
     // Inlists a function to be called when the tile is updated

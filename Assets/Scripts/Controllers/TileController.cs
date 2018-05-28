@@ -62,7 +62,11 @@ public class TileController : MonoBehaviour {
         // Is it highlighted
         if (!t.isHighlighted)
         {
-            if (t.isWhite)
+            if (t.tempColor != Color.clear)
+            {
+                rendere.color = t.tempColor;
+            }
+            else if (t.isWhite)
             {
                 rendere.color = whiteColor;
             }

@@ -20,7 +20,6 @@ public class World {
     public World(int width, int height, int cornerX, int cornerY, Color[] playerColors, int playerCount)
     {
         instance = this;
-        stateHandler = new StateHandler(this);
 
         this.width = width;
         this.height = height;
@@ -29,6 +28,7 @@ public class World {
 
         tiles = new Tile[width, height];
         characters = new List<Character>();
+        stateHandler = new StateHandler(this);
 
         CreateBoard(width, height, cornerX, cornerY);
         CreateCharacters();
@@ -60,30 +60,67 @@ public class World {
         {
             characters.Add(new Character(GetTileAt(1, y), Piece.PAWN, playerColors[0]));
         }
+
+        characters.Add(new Character(GetTileAt(0, 3), Piece.ROOK, playerColors[0]));
+        characters.Add(new Character(GetTileAt(0, 4), Piece.KNIGHT, playerColors[0]));
+        characters.Add(new Character(GetTileAt(0, 5), Piece.BISHOP, playerColors[0]));
+        characters.Add(new Character(GetTileAt(0, 6), Piece.QUEEN, playerColors[0]));
+        characters.Add(new Character(GetTileAt(0, 7), Piece.KING, playerColors[0]));
+        characters.Add(new Character(GetTileAt(0, 8), Piece.BISHOP, playerColors[0]));
+        characters.Add(new Character(GetTileAt(0, 9), Piece.KNIGHT, playerColors[0]));
+        characters.Add(new Character(GetTileAt(0, 10), Piece.ROOK, playerColors[0]));
+
     }
     // Player 2
     private void Player2()
     {
-        for (int y = 3; y < 11; y++)
+        for (int x = 3; x < 11; x++)
         {
-            characters.Add(new Character(GetTileAt(12, y), Piece.PAWN, playerColors[1]));
+            characters.Add(new Character(GetTileAt(x, 12), Piece.PAWN, playerColors[1]));
         }
+
+        characters.Add(new Character(GetTileAt(3, 13), Piece.ROOK, playerColors[1]));
+        characters.Add(new Character(GetTileAt(4, 13), Piece.KNIGHT, playerColors[1]));
+        characters.Add(new Character(GetTileAt(5, 13), Piece.BISHOP, playerColors[1]));
+        characters.Add(new Character(GetTileAt(6, 13), Piece.QUEEN, playerColors[1]));
+        characters.Add(new Character(GetTileAt(7, 13), Piece.KING, playerColors[1]));
+        characters.Add(new Character(GetTileAt(8, 13), Piece.BISHOP, playerColors[1]));
+        characters.Add(new Character(GetTileAt(9, 13), Piece.KNIGHT, playerColors[1]));
+        characters.Add(new Character(GetTileAt(10, 13), Piece.ROOK, playerColors[1]));
     }
     // Player 3
     private void Player3()
     {
-        for (int x = 3; x < 11; x++)
+        for (int y = 3; y < 11; y++)
         {
-            characters.Add(new Character(GetTileAt(x, 1), Piece.PAWN, playerColors[2]));
+            characters.Add(new Character(GetTileAt(12, y), Piece.PAWN, playerColors[2]));
         }
+
+        characters.Add(new Character(GetTileAt(13, 3), Piece.ROOK, playerColors[2]));
+        characters.Add(new Character(GetTileAt(13, 4), Piece.KNIGHT, playerColors[2]));
+        characters.Add(new Character(GetTileAt(13, 5), Piece.BISHOP, playerColors[2]));
+        characters.Add(new Character(GetTileAt(13, 6), Piece.QUEEN, playerColors[2]));
+        characters.Add(new Character(GetTileAt(13, 7), Piece.KING, playerColors[2]));
+        characters.Add(new Character(GetTileAt(13, 8), Piece.BISHOP, playerColors[2]));
+        characters.Add(new Character(GetTileAt(13, 9), Piece.KNIGHT, playerColors[2]));
+        characters.Add(new Character(GetTileAt(13, 10), Piece.ROOK, playerColors[2]));
     }
     // Player 4
     private void Player4()
     {
         for (int x = 3; x < 11; x++)
         {
-            characters.Add(new Character(GetTileAt(x, 12), Piece.PAWN, playerColors[3]));
+            characters.Add(new Character(GetTileAt(x, 1), Piece.PAWN, playerColors[3]));
         }
+
+        characters.Add(new Character(GetTileAt(3, 0), Piece.ROOK, playerColors[3]));
+        characters.Add(new Character(GetTileAt(4, 0), Piece.KNIGHT, playerColors[3]));
+        characters.Add(new Character(GetTileAt(5, 0), Piece.BISHOP, playerColors[3]));
+        characters.Add(new Character(GetTileAt(6, 0), Piece.QUEEN, playerColors[3]));
+        characters.Add(new Character(GetTileAt(7, 0), Piece.KING, playerColors[3]));
+        characters.Add(new Character(GetTileAt(8, 0), Piece.BISHOP, playerColors[3]));
+        characters.Add(new Character(GetTileAt(9, 0), Piece.KNIGHT, playerColors[3]));
+        characters.Add(new Character(GetTileAt(10, 0), Piece.ROOK, playerColors[3]));
     }
 
     // Creates the board

@@ -42,6 +42,8 @@ public class Character {
 
         t.character = this;
 
+        haveMoved = true;
+
         Update();
     }
 

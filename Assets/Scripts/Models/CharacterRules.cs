@@ -96,7 +96,7 @@ public class CharacterRules {
         List<Tile> result = new List<Tile>();
 
         // Up
-        for (int i = 0; i < world.height; i++)
+        for (int i = 1; i < world.height; i++)
         {
             if (Walkable(world.GetTileAt(t.x, t.y + i), c))
             {
@@ -106,9 +106,13 @@ public class CharacterRules {
                     break;
                 }
             }
+            else
+            {
+                break;
+            }
         }
         // Down
-        for (int i = 0; i < world.height; i++)
+        for (int i = 1; i < world.height; i++)
         {
             if (Walkable(world.GetTileAt(t.x, t.y - i), c))
             {
@@ -118,9 +122,13 @@ public class CharacterRules {
                     break;
                 }
             }
+            else
+            {
+                break;
+            }
         }
         // Left
-        for (int i = 0; i < world.width; i++)
+        for (int i = 1; i < world.width; i++)
         {
             if (Walkable(world.GetTileAt(t.x - i, t.y), c))
             {
@@ -130,9 +138,13 @@ public class CharacterRules {
                     break;
                 }
             }
+            else
+            {
+                break;
+            }
         }
         // Right
-        for (int i = 0; i < world.width; i++)
+        for (int i = 1; i < world.width; i++)
         {
             if(Walkable(world.GetTileAt(t.x + i, t.y), c))
             {
@@ -141,6 +153,10 @@ public class CharacterRules {
                 {
                     break;
                 }
+            }
+            else
+            {
+                break;
             }
         }
 
@@ -154,7 +170,7 @@ public class CharacterRules {
         List<Tile> result = new List<Tile>();
 
         // Up Left
-        for (int i = 0; i < world.width; i++)
+        for (int i = 1; i < world.width; i++)
         {
             if (Walkable(world.GetTileAt(t.x - i, t.y + i), c))
             {
@@ -164,9 +180,13 @@ public class CharacterRules {
                     break;
                 }
             }
+            else
+            {
+                break;
+            }
         }
         // Up Right
-        for (int i = 0; i < world.width; i++)
+        for (int i = 1; i < world.width; i++)
         {
             if (Walkable(world.GetTileAt(t.x + i, t.y + i), c))
             {
@@ -176,9 +196,13 @@ public class CharacterRules {
                     break;
                 }
             }
+            else
+            {
+                break;
+            }
         }
         // Down Left
-        for (int i = 0; i < world.width; i++)
+        for (int i = 1; i < world.width; i++)
         {
             if (Walkable(world.GetTileAt(t.x - i, t.y - i), c))
             {
@@ -188,9 +212,13 @@ public class CharacterRules {
                     break;
                 }
             }
+            else
+            {
+                break;
+            }
         }
         // Down Right
-        for (int i = 0; i < world.width; i++)
+        for (int i = 1; i < world.width; i++)
         {
             if (Walkable(world.GetTileAt(t.x + i, t.y - i), c))
             {
@@ -199,6 +227,10 @@ public class CharacterRules {
                 {
                     break;
                 }
+            }
+            else
+            {
+                break;
             }
         }
 
@@ -258,16 +290,51 @@ public class CharacterRules {
         Vector2 dir = PawnDirection(c);
         List<Tile> result = new List<Tile>();
 
-        if (!Walkable(world.GetTileAt(t.x + (int)dir.x, t.y + (int)dir.y), c))
+        // Atack
+        if(dir.x != 0)
+        {
+            // Left or right
+            Tile up = world.GetTileAt(t.x + (int)dir.x, t.y + 1);
+            Tile down = world.GetTileAt(t.x + (int)dir.x, t.y - 1);
+
+            if(up != null && up.character != null && up.character.color != c.color)
+            {
+                result.Add(up);
+            }
+            if (down != null && down.character != null && down.character.color != c.color)
+            {
+                result.Add(down);
+            }
+        }
+        else
+        {
+            // Up or Down
+            Tile right = world.GetTileAt(t.x + 1, t.y + (int)dir.y);
+            Tile left = world.GetTileAt(t.x - 1, t.y + (int)dir.y);
+
+            if (right != null && right.character != null && right.character.color != c.color)
+            {
+                result.Add(right);
+            }
+            if (left != null && left.character != null && left.character.color != c.color)
+            {
+                result.Add(left);
+            }
+        }
+
+        // Movement
+        Tile temp = world.GetTileAt(t.x + (int)dir.x, t.y + (int)dir.y);
+        if (!Walkable(temp, c) || temp.character != null)
         {
             return result;
         }
 
-        result.Add(world.GetTileAt(t.x + (int)dir.x, t.y + (int)dir.y));
+        result.Add(temp);
 
+        temp = world.GetTileAt(t.x + (int)dir.x * 2, t.y + (int)dir.y * 2);
         if (!c.haveMoved)
         {
-            if (Walkable(world.GetTileAt(t.x + (int)dir.x * 2, t.y + (int)dir.y * 2), c))
+            if (Walkable(temp, c) && temp.character == null)
             {
                 result.Add(world.GetTileAt(t.x + (int)dir.x * 2, t.y + (int)dir.y * 2));
             }
@@ -287,15 +354,15 @@ public class CharacterRules {
         }
         else if (c.color == world.playerColors[1])
         {
-            result.x = -1;
+            result.y = -1;
         }
         else if (c.color == world.playerColors[2])
         {
-            result.y = 1;
+            result.x = -1;
         }
         else if (c.color == world.playerColors[3])
         {
-            result.y = -1;
+            result.y = 1;
         }
 
         return result;

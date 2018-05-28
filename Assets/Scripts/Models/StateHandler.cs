@@ -18,11 +18,14 @@ public class StateHandler {
 
     // Tiles the character can move to
     List<Tile> moveableTiles;
+    // Hold the tiles, that a player moved from and to
+    Tile[] lastMoveTiles;
 
     public StateHandler(World world)
     {
         this.world = world;
         moveableTiles = new List<Tile>();
+        lastMoveTiles = new Tile[world.playerColors.Length * 2];
 
         characterRules = new CharacterRules(world);
     }
@@ -60,11 +63,10 @@ public class StateHandler {
         }
 
         // Check color;
-/*        if(t.character.color != world.playerColors[turnCount % world.playerColors.Length])
+        if (t.character.color != world.playerColors[turnCount % world.playerColors.Length])
         {
             return false;
         }
-*/
         // Deselect character
         if(selectedCharacter != null)
         {
@@ -109,6 +111,7 @@ public class StateHandler {
             return false;
         }
 
+        ColorLastMove(selectedCharacter.tile, t);
         // Move the character
         selectedCharacter.Move(t);
         DeselectCharacter();
@@ -174,6 +177,31 @@ public class StateHandler {
     private void FindMoveableTile()
     {
         moveableTiles = characterRules.GetMoveableTiles(selectedCharacter);
+    }
+
+    // Colors the tiles a player moved from and to
+    public void ColorLastMove(Tile from, Tile to)
+    {
+        int n1 = turnCount % world.playerColors.Length;
+        int n2 = turnCount % world.playerColors.Length + world.playerColors.Length;
+
+        // Moved from
+        if (lastMoveTiles[n1] != null)
+        {
+            lastMoveTiles[n1].SetTempColor(Color.clear);
+        }
+        lastMoveTiles[n1] = from;
+
+        // Moved to
+        if (lastMoveTiles[n2] != null)
+        {
+            lastMoveTiles[n2].SetTempColor(Color.clear);
+        }
+        lastMoveTiles[n2] = to;
+
+        // Set new Colors
+        from.SetTempColor(world.playerColors[n1]);
+        to.SetTempColor(world.playerColors[n1]);
     }
 
 }

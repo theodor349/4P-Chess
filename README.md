@@ -1,5 +1,5 @@
 # 4P-Chess
-Unity Project: 4 Pplayer chess
+Unity Project: 4 player chess
 
 What I learned:
 - How to manage multiple players 

@@ -25,7 +25,7 @@ public class Character {
     // Kills the character
     public void Die()
     {
-        Update(true); 
+        Update(true);
     }
 
     // Moves the character
